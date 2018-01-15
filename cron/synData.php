@@ -33,6 +33,8 @@ if (1 == strpos("$".$host, "https://"))
 }
 $content = json_decode(curl_exec($curl), true);
 $data = array();
+$sql = '';
+
 foreach ($content['showapi_res_body']['list']  as $row) {
     $data = array(
         'day' => date('Y-m-d'),
@@ -40,9 +42,8 @@ foreach ($content['showapi_res_body']['list']  as $row) {
         'area' => $row['area'],
         'pm25' => $row['pm2_5'],
         'aqi' => $row['aqi'],
-        'created' => date('Y-m-d H:i:s')
     );
-    $sql = "insert into data(day, hour, area, pm25, aqi, created)values('{$data['day']}', {$data['hour']}, '{$data['area']}', {$data['pm25']}, {$data['aqi']}, '{$data['created']}')";
-    $count = $db->exec($sql) or die(print_r($db->errorInfo(), true));
-    echo $sql . $count;
+    $sql .= "insert into data(day, hour, area, pm25, aqi, created)values('{$data['day']}', {$data['hour']}, '{$data['area']}', {$data['pm25']}, {$data['aqi']}, now());";
 }
+$count = $db->exec($sql) or die(print_r($db->errorInfo(), true));
+echo date('Y-m-d H:i:s') . '/n';
