@@ -3,7 +3,7 @@
  * 解析20140513到现在的空气质量数据，格式为csv
  *
  */
-
+exit;
 $dsn = "mysql:host=localhost;dbname=pm25";
 $db = new PDO($dsn, 'root', 'root');
 $db->query('SET NAMES utf8');
