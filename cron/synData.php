@@ -26,24 +26,24 @@ curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($curl, CURLOPT_FAILONERROR, false);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_HEADER, false);
-if (1 == strpos("$".$host, "https://"))
-{
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-}
+//if (1 == strpos("$".$host, "https://"))
+//{
+//    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+//    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+//}
 $content = json_decode(curl_exec($curl), true);
 $data = array();
 $sql = '';
-
+//var_dump($content);exit();
 foreach ($content['showapi_res_body']['list']  as $row) {
     $data = array(
         'day' => date('Y-m-d'),
         'hour' => date('H'),
         'area' => $row['area'],
-        'pm25' => $row['pm2_5'],
-        'aqi' => $row['aqi'],
+        'pm25' => is_numeric($row['pm2_5']) ? $row['pm2_5'] : 0,
+        'aqi' => is_numeric($row['aqi']) ? $row['aqi'] : 0,
     );
     $sql .= "insert into data(day, hour, area, pm25, aqi, created)values('{$data['day']}', {$data['hour']}, '{$data['area']}', {$data['pm25']}, {$data['aqi']}, now());";
 }
 $count = $db->exec($sql) or die(print_r($db->errorInfo(), true));
-echo date('Y-m-d H:i:s') . '/n';
+echo date('Y-m-d H:i:s') . PHP_EOL;
