@@ -23,8 +23,8 @@ include_once 'Util/Autoloader.php';
 
 $synData = new SynData();
 $data = $synData->doGet();
-var_dump($data);
-//$synData->doSyn($data);
+//var_dump($data);
+$synData->doSyn($data);
 /**
 *请求示例
 *如一个完整的url为http://api.aaaa.com/createobject?key1=value&key2=value2
