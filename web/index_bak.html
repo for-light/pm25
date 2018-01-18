@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>霾视 - 在线雾霾数据可视化统计与预测预警平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div id="app">
+    <button @click="setUsername()">
+        设置username
+    </button>
+    <button @click="getUsername()">
+        查看username
+    </button>
+    <button @click="delUsername()">
+        清除cookie
+    </button>
+    <button @click="setToken()">
+        生成token
+    </button>
+    <button @click="sendAjax()">
+        发送ajax请求
+    </button>
+    {{jsondata}}
+</div>
+<i class="glyphicon glyphicon-apple"></i>
+</body>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/vue.js"></script>
+<script src="./js/public.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            jsondata: '待获取'
+        },
+        methods: {
+            setUsername: function () {
+                var username = prompt('请输入您的名字！');
+                setCookie('username', username, 1);
+            },
+            getUsername: function () {
+                this.jsondata = getCookie('username');
+            },
+            delUsername: function () {
+                clearCookie('username');
+            },
+            getData: function () {
+                $.ajax({
+                   headers:{
+                       Authorization: 'APPCODE 50877461394c49ea89733c51498af352'
+                   },
+                    url: 'https://ali-pm25.showapi.com/pm25-top',
+                    success: function (data, status) {
+                        console.log(data);
+                    }
+                });
+            },
+            sendAjax: function () {
+                var url = getCookie('_token') ? 'http://localhost/pm25/api?_token=' + getCookie('_token') : 'http://localhost/pm25/api';
+                $.ajax({
+                    url: url,
+                    success: function (data, status) {
+                        console.log(data);
+                    }
+                });
+            },
+            setToken: function () {
+                setCookie('_token', '1234fsflfkflgk123');
+            }
+        }
+    })
+</script>
+</html>
