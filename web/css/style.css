@@ -3,10 +3,12 @@
     background: #eee;
     border-bottom: 4px solid #898989;
 }
+
 .selected2 {
     background: #eee;
     border-left: 4px solid #898989;
 }
+
 a {
     color: #454545;
     text-decoration: none;
@@ -71,52 +73,73 @@ a {
     padding-top: 10px;
     /*border-bottom: 1px solid #C4C4C4;*/
     /*background-image: url(../img/c-background.jpg);*/
-    background: #66A89A;
+    background: #8FBC8F;
+    position: relative;
 }
 
 .wrap .content .more a {
     color: #1E9E69;
 }
-.wrap .content .address-number p:first-child{
+
+.wrap .content .address-number p:first-child {
     width: 60%;
     font-size: 30px;
     border-bottom: 1px solid #8B2323;
 }
-.wrap .content .address-number{
+
+.wrap .content .address-number {
     padding-left: 100px;
 }
+.wrap .content .address-number .note{
+    font-size: 18px;color: floralwhite
+}
+.wrap .content  .update-time {
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    font-style: italic;
+    color: white;
+}
 
-.wrap .chart1{
+.wrap .chart1 {
     padding-top: 20px;
 }
-.wrap .chart2{
+
+.wrap .chart2 {
     padding-top: 20px;
 }
-.wrap .sites .sites-list{
+
+.wrap .sites .sites-list {
     height: 230px;
     overflow: auto;
 }
+
 /*rank*/
-.wrap .rank-desc{
+.wrap .rank-desc {
     background: #66A89A;
     padding-bottom: 10px;
     color: white;
 }
-.wrap .rank-classify{
+
+.wrap .rank-classify {
     font-size: 18px;
 }
-.wrap .rank-content .table-head{
+
+.wrap .rank-content .table-head {
     font-weight: bold;
 }
+
 /*可视化chart*/
-.wrap .visual-chart .visual-classify .visual-classify-title{
+.wrap .visual-chart .visual-classify .visual-classify-title {
 }
+
 /*底部*/
 .wrap .footer {
     background: #F1F1F1;
     padding-top: 10px;
 }
-.wrap .footer .copyright{
+
+.wrap .footer .copyright {
     font-style: italic;
     color: #5E5E5E;
 }

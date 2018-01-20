@@ -67,7 +67,7 @@
                 <!--</div>-->
             <!--</div>-->
             <!--<p class="rank-info">AQI指数为<strong>158</strong>:击败了全国 <strong>79%</strong> 的城市，目前城市排名<strong>75</strong></p>-->
-            <p class="note" style="font-size: 18px;"><strong>温馨提示</strong>：空气质量可接受，但某些污染物可能对极少异常敏感人群健康有较弱影响。极少数异常敏感人群减少户外活动
+            <p class="note"><strong>温馨提示</strong>：空气质量可接受，但某些污染物可能对极少异常敏感人群健康有较弱影响。极少数异常敏感人群减少户外活动
             </p>
         </div>
         <div class="col-md-6 sites">
@@ -85,6 +85,7 @@
                 <!--</ul>-->
             <!--</div>-->
         <!--</div>-->
+        <div class="update-time">*数据更新于 2018-01-15 12:02:00</div>
     </div>
     <div class="row chart2">
         <div class="col-md-1">
@@ -400,7 +401,7 @@
 <script>
     var data_number = echarts.init(document.getElementById('data-number'));
     var option = {
-        backgroundColor: '#66A89A',
+        backgroundColor: '#8FBC8F',
         tooltip: {
             "trigger": 'item',
             "formatter": "{a} : ({d}%)"
@@ -533,7 +534,7 @@
                                 formatter: '\n全国排行',
                                 textStyle: {
                                     color: '#555',
-                                    fontSize: 10
+                                    fontSize: 15
                                 }
                             }
                         },
@@ -561,7 +562,7 @@
     var dataAll = [389, 259, 262, 324];
     var yAxisData = ['丁子口','凤凰山','遵义','第三中学'];
     var option = {
-        backgroundColor: '#66A89A',
+        backgroundColor: '#8FBC8F',
         title:[
             {text:"各监测点数据",
                 textStyle:{color:"#333",fontSize:"20", fontWeight:'100'},
