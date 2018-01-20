@@ -7,116 +7,7 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/font-awesome.min.css">
     <link rel="stylesheet" href="./css/style.css">
-    <style>
-        /*公共样式*/
-        .selected {
-            background: #eee;
-            border-bottom: 3px solid #898989;
-        }
-
-        a {
-            color: #454545;
-            text-decoration: none;
-        }
-
-        /*头部*/
-        .wrap .header {
-            border-bottom: 1px solid #C4C4C4;
-            line-height: 30px;
-            padding-top: 2px;
-            padding-bottom: 2px;
-        }
-
-        .wrap .header .address a {
-            color: #337ab7;
-        }
-
-        .wrap .header .address-search {
-            position: relative;
-        }
-
-        .wrap .header .address-search input {
-            position: absolute;
-            right: 10px;
-            width: 200px;
-            height: 30px;
-            border-radius: 42px;
-            border: none;
-            background: whitesmoke;
-            transition: .3s linear;
-        }
-
-        .wrap .header .address-search input:hover {
-            width: 300px;
-        }
-
-        .wrap .header .address-search button {
-            position: absolute;
-            right: 10px;
-            background: none;
-            border: none;
-            outline: none;
-        }
-
-        .wrap .header .address-search button:before {
-            content: "\f002";
-            font-family: FontAwesome;
-            color: #324b4e;
-        }
-
-        /*导航*/
-        .wrap .m-nav {
-            line-height: 86px;
-            font-size: 20px;
-            border-bottom: 1px solid #C4C4C4;
-        }
-
-        /*内容区*/
-        .wrap .content {
-            /*margin-left: 100px;*/
-            /*margin-right: 100px;*/
-            padding-top: 10px;
-            /*border-bottom: 1px solid #C4C4C4;*/
-            background-image: url(./img/c-background.png);
-        }
-
-        .wrap .content .more a {
-            color: #1E9E69;
-        }
-        .wrap .content .address-number p:first-child{
-            width: 60%;
-            font-size: 30px;
-            border-bottom: 1px solid #C4C4C4;
-        }
-        .wrap .content .address-number{
-            padding-left: 100px;
-        }
-        .wrap .content .address-number .pm25{
-            width: 60%;
-            border-bottom: 1px solid #C4C4C4;
-            margin-bottom: 10px;
-        }
-        .wrap .content .address-number .aqi .number{
-            font-size: 50px;
-        }
-        .wrap .content .address-number .pm25 .number{
-            font-size: 50px;
-        }
-        .wrap .chart{
-            padding-top: 10px;
-        }
-        /*底部*/
-        .wrap .footer {
-            background: #F1F1F1;
-            padding-top: 10px;
-        }
-
-        .wrap .footer .copyright a {
-            color: #5E5E5E;
-            font-size: 20px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="./css/kuCity.css">
 </head>
 <body>
 
@@ -127,7 +18,7 @@
         </div>
         <div class="col-md-2 col-xs-6 address">
             <i class="icon-map-marker"></i>
-            <span>铜仁地区</span>|<a>更换</a>
+            <span>铜仁地区</span>|<a href="javascript:void(0)" data-toggle="modal" data-target="#areaChooseModal">更换</a>
         </div>
         <div class="col-md-2 userinfo hidden-xs">
             <i class="icon-user"></i>
@@ -155,9 +46,9 @@
             <div class="col-md-4"></div>
             <div class="col-md-6">
                 <ul class="nav nav-pills">
-                    <li role="presentation" class="selected"><a href="#"><i class="icon-home"></i> 首页</a></li>
-                    <li role="presentation"><a href="#"><i class=" icon-leaf"></i> 数据可视化</a></li>
-                    <li role="presentation"><a href="#"><i class="  icon-signal"></i> 排行榜</a></li>
+                    <li role="presentation" class="selected"><a href="index.html"><i class="icon-home"></i> 首页</a></li>
+                    <li role="presentation"><a href="visual.html"><i class=" icon-leaf"></i> 数据可视化</a></li>
+                    <li role="presentation"><a href="rank.html"><i class="  icon-signal"></i> 排行榜</a></li>
                     <li role="presentation"><a href="#"><i class=" icon-bullhorn"></i> 资讯</a></li>
                 </ul>
             </div>
@@ -167,55 +58,51 @@
     <!--内容区-->
     <div class="row content">
         <div class="col-md-6 address-number">
-            <p><i class="icon-map-marker"></i> 铜仁地区<span style="font-size: 20px"> pm25浓度</span></p>
-            <div class="pm25">
-                <div class="info">
-                    <span class="number">300</span>
-                    <span class="level" style="padding: 5px 10px 5px 10px;background: red">严重污染</span>
-                </div>
-            </div>
-            <p class="rank-info">AQI指数为158:击败了全国 79% 的城市，目前城市排名75</p>
-            <p class="note">提示：空气质量可接受，但某些污染物可能对极少异常敏感人群健康有较弱影响。
-                极少数异常敏感人群减少户外活动
+            <p><i class="icon-map-marker"></i> 铜仁地区</p>
+            <div id="data-number" style="height: 300px"></div>
+            <!--<div class="pm25">-->
+                <!--<div class="info">-->
+                    <!--<span class="number">300μg/m³</span>-->
+                    <!--<span class="level">严重污染</span>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<p class="rank-info">AQI指数为<strong>158</strong>:击败了全国 <strong>79%</strong> 的城市，目前城市排名<strong>75</strong></p>-->
+            <p class="note"><strong>温馨提示</strong>：空气质量可接受，但某些污染物可能对极少异常敏感人群健康有较弱影响。极少数异常敏感人群减少户外活动
             </p>
         </div>
-        <div class="col-md-3 sites">
-            <div class="panel panel-success">
-                <!-- Default panel contents -->
-                <div class="panel-heading">监测站数据</div>
-                <div class="panel-body">
-                    <p>铜仁地区共有5个监测站点(微克/立方米)</p>
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item">地区1 <span class="pull-right">32</span></li>
-                    <li class="list-group-item">地区2 <span class="pull-right">34</span></li>
-                    <li class="list-group-item">地区3 <span class="pull-right">38</span></li>
-                    <li class="list-group-item">地区4 <span class="pull-right">39</span></li>
-                    <li class="list-group-item">地区5 <span class="pull-right">31</span></li>
-                </ul>
-            </div>
+        <div class="col-md-6 sites">
+            <div id="sites-list" style="height: 350px"></div>
         </div>
-        <div class="col-md-3 news">
-            <div class="panel panel-default">
-                <!-- Default panel contents -->
-                <div class="panel-heading">最新资讯<span class="more"><a href="#">/更多</a></span></div>
-                <!-- List group -->
-                <ul class="list-group">
-                    <li class="list-group-item"><a>新一代雾霾神器诞生</a></li>
-                    <li class="list-group-item"><a>防霾口罩推荐</a></li>
-                    <li class="list-group-item"><a>pm2.5等级说明</a></li>
-                </ul>
-            </div>
-        </div>
+        <!--<div class="col-md-3 news">-->
+            <!--<div class="panel panel-success">-->
+                <!--&lt;!&ndash; Default panel contents &ndash;&gt;-->
+                <!--<div class="panel-heading">最新资讯<span class="more"><a href="#">/更多</a></span></div>-->
+                <!--&lt;!&ndash; List group &ndash;&gt;-->
+                <!--<ul class="list-group">-->
+                    <!--<li class="list-group-item"><a>新一代雾霾神器诞生</a><span class="badge">new</span></li>-->
+                    <!--<li class="list-group-item"><a>防霾口罩推荐</a></li>-->
+                    <!--<li class="list-group-item"><a>pm2.5等级说明</a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
-    <div class="row chart">
-        <div class="col-md-2">
+    <div class="row chart2">
+        <div class="col-md-1">
 
         </div>
-        <div class="col-md-8">
-            <div id="main" style="width: auto;height:400px;"></div>
+        <div class="col-md-10">
+            <div id="forecast" style="width: auto;height:400px;"></div>
         </div>
-        <div class="col-md-2>"></div>
+        <div class="col-md-1>"></div>
+    </div>
+    <div class="row chart1">
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-10">
+            <div id="data-24h" style="width: auto;height:400px;"></div>
+        </div>
+        <div class="col-md-1>"></div>
     </div>
     <!--内容区end-->
     <!--底部-->
@@ -228,8 +115,8 @@
                     href="https://github.com/for-light">Github</a> | <a target="_blank"
                                                                         href="https://blog.hoping.me">博客</a> | <a
                     target="_blank" href="about.html">关于</a></p>
-            <p style="font-style:italic">Powered By Lu tian song 版权所有</p>
-            <address><em>address:南京信息工程大学计算机与软件学院</em></address>
+            <p>Powered By Lu tian song 版权所有</p>
+            <address>address:南京信息工程大学计算机与软件学院</address>
         </div>
         <div class="col-md-2">
 
@@ -237,15 +124,36 @@
 
     </div>
     <!--底部end-->
-
+    <!--弹出框-->
+    <div class="modal fade" id="areaChooseModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">选择地区</h4>
+                </div>
+                <div class="modal-body">
+                    <p><input id="areaChoose" placeholder="点击选择地区"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
 </div>
 </body>
 <script src="./js/jquery.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/vue.js"></script>
 <script src="./js/public.js"></script>
+<script src="./js/ecStat.min.js"></script>
 <script src="./js/echarts.js"></script>
+<script src="./js/kuCity.js"></script>
 <script>
+    $('#areaChoose').kuCity();
     $('.username').hover(function () {
         $('.user-operate').show();
     }, function () {
@@ -256,16 +164,25 @@
     }, function () {
         $('.user-operate').hide()
     })
-
 </script>
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
+    var data_24h = echarts.init(document.getElementById('data-24h'));
 
     // 指定图表的配置项和数据
     option = {
+        toolbox: {
+            show: true,
+            feature: {
+                dataZoom: {},
+                dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
         title: {
-            text: '最近21个小时AQI与pm25值',
+            text: '最近21个小时的AQI系数与PM25浓度',
             left: '50%',
             textAlign: 'center'
         },
@@ -284,13 +201,13 @@
             extraCssText: 'box-shadow: 0 0 5px rgba(0,0,0,0.3)'
         },
         legend: {
-            right: 20,
+            left: 50,
             orient: 'vertical',
-            data: ['aqi','pm25']
+            data: ['AQI', 'PM25']
         },
         xAxis: {
             type: 'category',
-            data: ['00:00','2:00','4:00','6:00','8:00','10:00','12:00','14:00','16:00','18:00','20:00',"22:00"],
+            data: ['00:00', '2:00', '4:00', '6:00', '8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', "22:00"],
             boundaryGap: false,
             splitLine: {
                 show: true,
@@ -337,7 +254,7 @@
             }
         },
         series: [{
-            name: 'aqi',
+            name: 'AQI',
             type: 'line',
             smooth: true,
             showSymbol: false,
@@ -366,7 +283,7 @@
                 }
             }
         }, {
-            name: 'pm25',
+            name: 'PM25',
             type: 'line',
             smooth: true,
             showSymbol: false,
@@ -398,6 +315,281 @@
     };
 
     // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
+    data_24h.setOption(option);
+</script>
+<script>
+    var forecast = echarts.init(document.getElementById('forecast'));
+    var option = {
+        title: {
+            text: '未来7天PM25浓度值预测',
+            subtext: '基于贝叶斯预测模型',
+            left: '50%',
+            textAlign: 'center'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['最高值','最低值']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataZoom: {},
+                dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis:  {
+            type: 'category',
+            boundaryGap: false,
+            data: ['20170712','20170713','20170714','20170715','20170716','20170717','20170718']
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '{value}'
+            }
+        },
+        series: [
+            {
+                name:'最高浓度',
+                type:'line',
+                data:[11, 11, 15, 13, 12, 13, 10],
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'最低浓度',
+                type:'line',
+                data:[1, -2, 2, 5, 3, 2, 0],
+                markPoint: {
+                    data: [
+                        {name: '周最低', value: -2, xAxis: 1, yAxis: -1.5}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+
+    forecast.setOption(option);
+//    var option = {
+//        xAxis: [{
+//            type: 'value',
+//            scale: true
+//        }]
+//    }
+
+</script>
+<script>
+    var data_number = echarts.init(document.getElementById('data-number'));
+    var option = {
+        backgroundColor: '#66A89A',
+        tooltip: {
+            "trigger": 'item',
+            "formatter": "{a} : ({d}%)"
+        },
+        series: [
+            {
+                name: 'PM25浓度',
+                type: 'pie',
+                radius: ['40%', '45%'],
+                center: ['15%', '40%'],
+                startAngle: 225,
+                color: [new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: '#FFFFFF'
+                }, ]), "transparent"],
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                label: {
+                    normal: {
+                        position: 'center'
+                    }
+                },
+                data: [{
+                    value: 75,
+                    name: 'PM25浓度',
+                    label: {
+                        normal: {
+                            formatter: 'PM25浓度',
+                            textStyle: {
+                                color: '#fff',
+                                fontSize: 16
+                            }
+                        }
+                    }
+                }, {
+                    value: 25,
+                    name: '%',
+                    label: {
+                        normal: {
+                            formatter: '\n35μg/m³',
+                            textStyle: {
+                                color: '#FFFFFF',
+                                fontSize: 20
+
+                            }
+                        }
+                    }
+                },
+                ]
+            },
+            {
+                name: ' AQI指数',
+                type: 'pie',
+                radius: ['40%', '45%'],
+                center: ['45%', '40%'],
+                startAngle: 225,
+                color: [new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: '#CDCD00'
+                }]), "transparent"],
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                label: {
+                    normal: {
+                        position: 'center'
+                    }
+                },
+                data: [{
+                    value: 75,
+                    name: 'AQI指数',
+                    label: {
+                        normal: {
+                            formatter: 'AQI指数',
+                            textStyle: {
+                                color: '#fff',
+                                fontSize: 16
+
+                            }
+                        }
+                    }
+                }, {
+                    value: 25,
+                    name: '%',
+                    label: {
+                        normal: {
+                            formatter: '\n34',
+                            textStyle: {
+                                color: '#FFFFFF',
+                                fontSize: 20
+
+                            }
+                        }
+                    }
+                },
+                ]
+            },
+            {
+                name: '饼图二',
+                type: 'pie',
+                radius: ['40%', '45%'],
+                center: ['75%', '40%'],
+                label: {
+                    normal: {
+                        position: 'center'
+                    }
+                },
+                data: [
+                    {
+                        value: 30,
+                        name: '占有率',
+                        label: {
+                            normal: {
+                                formatter: '{d} %',
+                                textStyle: {
+                                    fontSize: 30
+                                }
+                            }
+                        }},
+                    {
+                        value: 70,
+                        name: '占位',
+                        label: {
+                            normal: {
+                                formatter: '\n全国排行',
+                                textStyle: {
+                                    color: '#555',
+                                    fontSize: 10
+                                }
+                            }
+                        },
+                        tooltip: {
+                            show: false
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#fff'
+                            },
+                            emphasis: {
+                                color: '#aaa'
+                            }
+                        },
+                        hoverAnimation: false
+                    }
+                ]
+            },
+        ]
+    };
+    data_number.setOption(option);
+</script>
+<script>
+    var sites_list = echarts.init(document.getElementById('sites-list'));
+    var dataAll = [389, 259, 262, 324];
+    var yAxisData = ['丁子口','凤凰山','遵义','第三中学'];
+    var option = {
+        backgroundColor: '#66A89A',
+        title:[
+            {text:"各监测点数据",
+                textStyle:{color:"#333",fontSize:"20", fontWeight:'100'},
+            },
+        ],
+        tooltip: {
+            formatter: '{b} ({c})'
+        },
+        xAxis: [
+            {gridIndex: 0, axisTick: {show:false},axisLabel: {show:false},splitLine: {show:false},axisLine: {show:false }},
+        ],
+        yAxis: [
+            {  gridIndex: 0, interval:0,data:yAxisData.reverse(),
+                axisTick: {show:false}, axisLabel: {show:true},splitLine: {show:false},
+                axisLine: {show:true,lineStyle:{color:"#4A4A4A",fontSize:'20'}},
+            }
+        ],
+        series: [
+            {
+                name: '投诉原因TOP10',
+                type: 'bar',xAxisIndex: 0,yAxisIndex: 0,barWidth:'45%',
+                itemStyle:{normal:{color:'#EEEEE0',fontSize:'20'}},
+                label:{normal:{show:true, position:"right",textStyle:{color:"#4A4A4A"}}},
+                data: dataAll.sort(),
+            },
+
+        ]
+    };
+    sites_list.setOption(option);
 </script>
 </html>
