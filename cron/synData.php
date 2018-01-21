@@ -10,13 +10,11 @@
 $dsn = "mysql:host=localhost;dbname=pm25";
 $db = new PDO($dsn, 'root', 'root');
 $db->query('SET NAMES utf8');
-$year = date('Y');
-$month = date('m');
-$day = date('d');
+$day = date('Y-m-d');
 $hour = date('H');
 //$day = '2018-01-16';
 //$hour = '16';
-$sql = "select id from data where year = '{$year}' and month = '{$month}' and day = '{$day}' and hour = '{$hour}' limit 1";
+$sql = "select id from data where day = '{$day}' and hour = '{$hour}' limit 1";
 $result = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
 if (!$result) {
     $host = "https://ali-pm25.showapi.com";
@@ -45,14 +43,15 @@ if (!$result) {
 //var_dump($content);exit();
     foreach ($content['showapi_res_body']['list'] as $row) {
         $data = array(
+            'day' => $day,
+            'hour' => $hour,
             'area' => $row['area'],
             'pm25' => is_numeric($row['pm2_5']) ? $row['pm2_5'] : 0,
             'aqi' => is_numeric($row['aqi']) ? $row['aqi'] : 0,
         );
-        $sql .= "insert into data(year, month, day, hour, area, pm25, aqi, created)values('{$year}', {$month}, {$day}, {$hour}, '{$data['area']}', {$data['pm25']}, {$data['aqi']}, now());";
+        $sql .= "insert into data(day, hour, area, pm25, aqi, created)values('{$data['day']}', {$data['hour']}, '{$data['area']}', {$data['pm25']}, {$data['aqi']}, now());";
     }
-    $db->exec($sql) or die(var_dump($db->errorInfo()));
-    //$db->exec($sql) or die(print_r(date('Y-m-d H:i:s') . $db->errorInfo() . 'error' . PHP_EOL));
-    echo date('Y-m-d H:i:s') . 'complete!' . PHP_EOL;
+    $db->exec($sql) or die(print_r($day . $hour . 'error' . PHP_EOL));
+    echo $day . $hour . 'complete!' . PHP_EOL;
 }
 
