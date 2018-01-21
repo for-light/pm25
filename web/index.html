@@ -49,7 +49,7 @@
                     <li role="presentation" class="selected"><a href="index.html"><i class="icon-home"></i> 首页</a></li>
                     <li role="presentation"><a href="visual.html"><i class=" icon-leaf"></i> 数据可视化</a></li>
                     <li role="presentation"><a href="rank.html"><i class="  icon-signal"></i> 排行榜</a></li>
-                    <li role="presentation"><a href="#"><i class=" icon-bullhorn"></i> 资讯</a></li>
+                    <li role="presentation"><a href="news.html"><i class=" icon-bullhorn"></i> 资讯</a></li>
                 </ul>
             </div>
         </div>
@@ -85,7 +85,7 @@
                 <!--</ul>-->
             <!--</div>-->
         <!--</div>-->
-        <div class="update-time">*数据更新于 2018-01-15 12:02:00</div>
+        <div class="update-time">*数据最后更新于 2018-01-15 12:02:00</div>
     </div>
     <div class="row chart2">
         <div class="col-md-1">
@@ -401,7 +401,7 @@
 <script>
     var data_number = echarts.init(document.getElementById('data-number'));
     var option = {
-        backgroundColor: '#8FBC8F',
+        backgroundColor: '#5F9EA0',
         tooltip: {
             "trigger": 'item',
             "formatter": "{a} : ({d}%)"
@@ -463,7 +463,7 @@
                 startAngle: 225,
                 color: [new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                     offset: 0,
-                    color: '#F0FFFF'
+                    color: '#fff'
                 }]), "transparent"],
                 labelLine: {
                     normal: {
@@ -559,12 +559,16 @@
 </script>
 <script>
     var sites_list = echarts.init(document.getElementById('sites-list'));
-    var dataAll = [389, 259, 262, 324];
-    var yAxisData = ['丁子口','凤凰山','遵义','第三中学'];
+    var dataAll = [389, 259, 262, 324,389, 259, 262, 324];
+    var yAxisData = ['丁子口','凤凰山','遵义','第三中学附属中心','丁子口','凤凰山','遵义','第三中学附属中心'];
     var option = {
-        backgroundColor: '#8FBC8F',
+        backgroundColor: '#5F9EA0',
+        grid: [
+            {x: '20%'},
+        ],
         title:[
             {text:"各监测点数据",
+                left:'10%',
                 textStyle:{color:"#333",fontSize:"20", fontWeight:'100'},
             },
         ],
@@ -575,16 +579,18 @@
             {gridIndex: 0, axisTick: {show:false},axisLabel: {show:false},splitLine: {show:false},axisLine: {show:false }},
         ],
         yAxis: [
-            {  gridIndex: 0, interval:0,data:yAxisData.reverse(),
+            {
+                offset:2,
+                gridIndex: 0, interval:0,data:yAxisData.reverse(),
                 axisTick: {show:false}, axisLabel: {show:true},splitLine: {show:false},
-                axisLine: {show:true,lineStyle:{color:"#4A4A4A",fontSize:'20'}},
+                axisLine: {show:true,fontSize:"20", lineStyle:{color:"#4A4A4A"}},
             }
         ],
         series: [
             {
-                name: '投诉原因TOP10',
+                name: '各监测点数据',
                 type: 'bar',xAxisIndex: 0,yAxisIndex: 0,barWidth:'45%',
-                itemStyle:{normal:{color:'#EEEEE0',fontSize:'20'}},
+                itemStyle:{normal:{color:'#fff',fontSize:'20'}},
                 label:{normal:{show:true, position:"right",textStyle:{color:"#4A4A4A"}}},
                 data: dataAll.sort(),
             },
