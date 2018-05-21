@@ -27,7 +27,10 @@ for ($i = 2; $i < count($filenames); $i++) {
         $area = $column[0];
         for ($k = 1; $k < $r_count; $k += 15) {
             //$data = [$column[$j - 1], $column[$j]];
-            $sql .= "insert into data(day, hour, area, pm25, aqi, created)values('{$day}', {$hours[$k]}, '{$area}', {$column[$k + 1]}, {$column[$k]}, now());";
+            $sql .= "insert into data(day, hour, area,
+            pm25, aqi, created)values('{$day}', {$hours[$k]}, 
+            '{$area}', {$column[$k + 1]},
+            {$column[$k]}, now());";
         }
         $db->exec($sql);
     }
