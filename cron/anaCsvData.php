@@ -9,14 +9,12 @@ $db = new PDO($dsn, 'root', 'root');
 $db->query('SET NAMES utf8');
 
 $filenames = scandir('../../csv');
-//var_dump($filenames);exit();
 for ($i = 2; $i < count($filenames); $i++) {
     $data_list = [];
     $file = fopen('../../csv/' . $filenames[$i], 'r');
     while ($data = fgetcsv($file)) { //每次读取CSV里面的一行内容
         $data_list[] = $data;
     }
-//    echo count($data_list) . PHP_EOL;
     $day = $data_list[1][0];//日期
     $r_count = count($data_list);//数据总共有多少行
     $c_count = count($data_list[0]);//数据总共有多少列
@@ -34,7 +32,6 @@ for ($i = 2; $i < count($filenames); $i++) {
         }
         $db->exec($sql);
     }
-    echo "$day complete!". PHP_EOL;
 }
 fclose($file);
 
